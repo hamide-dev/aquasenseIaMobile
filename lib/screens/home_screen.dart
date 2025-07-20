@@ -183,6 +183,17 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  // --- DEBUT : AJOUT DU LOGO ---
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 20.0), // Espacement sous le logo
+                    child: Image.asset(
+                      'assets/images/logo.png', // Chemin vers votre image logo.png
+                      height: 120, // Hauteur du logo (ajustez si besoin)
+                      // width: 120, // Vous pouvez aussi définir une largeur si nécessaire
+                    ),
+                  ),
+                  // --- FIN : AJOUT DU LOGO ---
+
                   // Titre "AQUASENSEIA" avec animation
                   SlideTransition(
                     position: _slideAnimation,

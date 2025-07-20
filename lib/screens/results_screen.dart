@@ -203,6 +203,39 @@ class _ResultsScreenState extends State<ResultsScreen> with SingleTickerProvider
                               .toList(),
                         ),
                       ),
+                      const SizedBox(height: 30),
+                      Center(
+                        child: ElevatedButton.icon(
+                          icon: const Icon(Icons.send, color: Colors.white),
+                          label: const Text(
+                            'Envoi au Ministère des Eaux',
+                            style: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Color(0xFF20B2CF),
+                            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            elevation: 4,
+                          ),
+                          onPressed: () async {
+                            // Simulation d'envoi (ici, on peut ajouter un délai ou une fausse requête HTTP)
+                            await Future.delayed(const Duration(seconds: 1));
+                            if (context.mounted) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text(
+                                    'Les données ont été transmises avec succès au Ministère des Eaux.',
+                                    style: TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                  backgroundColor: Color(0xFF20B2CF),
+                                ),
+                              );
+                            }
+                          },
+                        ),
+                      ),
                     ],
                   ),
                 ),
