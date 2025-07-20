@@ -10,61 +10,64 @@ class AnalysisChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BarChart(
-      BarChartData(
-        alignment: BarChartAlignment.spaceAround,
-        maxY: 100,
-        barTouchData: BarTouchData(enabled: false),
-        titlesData: FlTitlesData(
-          show: true,
-          bottomTitles: AxisTitles(
-            sideTitles: SideTitles(
-              showTitles: true,
-              reservedSize: 38,
-              getTitlesWidget: getTitles,
+    return SizedBox(
+      height: 200,
+      child: BarChart(
+        BarChartData(
+          alignment: BarChartAlignment.spaceAround,
+          maxY: 100,
+          barTouchData: BarTouchData(enabled: false),
+          titlesData: FlTitlesData(
+            show: true,
+            bottomTitles: AxisTitles(
+              sideTitles: SideTitles(
+                showTitles: true,
+                reservedSize: 38,
+                getTitlesWidget: getTitles,
+              ),
+            ),
+            leftTitles: AxisTitles(
+              sideTitles: SideTitles(
+                showTitles: true,
+                reservedSize: 40,
+                getTitlesWidget: (value, meta) {
+                  return Text(
+                    '${value.toInt()}%',
+                    style: const TextStyle(
+                      color: Colors.white70, // Couleur pour les étiquettes de l'axe Y
+                      fontWeight: FontWeight.bold, // Gras
+                      fontSize: 12,
+                      fontFamily: 'LeagueSpartan',
+                    ),
+                  );
+                },
+              ),
+            ),
+            topTitles: const AxisTitles(
+              sideTitles: SideTitles(showTitles: false),
+            ),
+            rightTitles: const AxisTitles(
+              sideTitles: SideTitles(showTitles: false),
             ),
           ),
-          leftTitles: AxisTitles(
-            sideTitles: SideTitles(
-              showTitles: true,
-              reservedSize: 40,
-              getTitlesWidget: (value, meta) {
-                return Text(
-                  '${value.toInt()}%',
-                  style: const TextStyle(
-                    color: Colors.white70, // Couleur pour les étiquettes de l'axe Y
-                    fontWeight: FontWeight.bold,
-                    fontSize: 12,
-                    fontFamily: 'LeagueSpartan',
-                  ),
-                );
-              },
-            ),
+          borderData: FlBorderData(show: false),
+          barGroups: [
+            makeGroupData(0, result.algaeLevel.toDouble(), barColor: const Color(0xFF00796B)), // Vert/bleu foncé
+            makeGroupData(1, result.clarityLevel.toDouble(), barColor: const Color(0xFF0097A7)), // Bleu plus clair
+            makeGroupData(2, result.conditionLevel.toDouble(), barColor: const Color(0xFF00ACC1)), // Cyan
+          ],
+          gridData: FlGridData(
+            show: true,
+            drawHorizontalLine: true,
+            drawVerticalLine: false,
+            horizontalInterval: 25, // Intervalles de 25%
+            getDrawingHorizontalLine: (value) {
+              return const FlLine(
+                color: Colors.white12, // Lignes de grille très claires
+                strokeWidth: 1,
+              );
+            },
           ),
-          topTitles: const AxisTitles(
-            sideTitles: SideTitles(showTitles: false),
-          ),
-          rightTitles: const AxisTitles(
-            sideTitles: SideTitles(showTitles: false),
-          ),
-        ),
-        borderData: FlBorderData(show: false),
-        barGroups: [
-          makeGroupData(0, result.algaeLevel.toDouble(), barColor: const Color(0xFF00796B)), // Vert/bleu foncé
-          makeGroupData(1, result.clarityLevel.toDouble(), barColor: const Color(0xFF0097A7)), // Bleu plus clair
-          makeGroupData(2, result.conditionLevel.toDouble(), barColor: const Color(0xFF00ACC1)), // Cyan
-        ],
-        gridData: FlGridData(
-          show: true,
-          drawHorizontalLine: true,
-          drawVerticalLine: false,
-          horizontalInterval: 25, // Intervalles de 25%
-          getDrawingHorizontalLine: (value) {
-            return const FlLine(
-              color: Colors.white12, // Lignes de grille très claires
-              strokeWidth: 1,
-            );
-          },
         ),
       ),
     );
@@ -93,30 +96,34 @@ class AnalysisChart extends StatelessWidget {
   Widget getTitles(double value, TitleMeta meta) {
     const style = TextStyle(
       color: Colors.white, // Couleur pour les étiquettes de l'axe X
-      fontWeight: FontWeight.bold,
+      fontWeight: FontWeight.bold, // Gras
       fontSize: 14,
       fontFamily: 'LeagueSpartan',
     );
 
     String text;
+    Widget labelWidget;
     switch (value.toInt()) {
       case 0:
         text = 'Algues';
+        labelWidget = Text(text, style: style);
         break;
       case 1:
         text = 'Clarté';
+        labelWidget = Text(text, style: style);
         break;
       case 2:
         text = 'État';
+        labelWidget = Text(text, style: style);
         break;
       default:
-        text = '';
+        labelWidget = const SizedBox.shrink();
         break;
     }
 
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
-      child: Text(text, style: style),
+      child: labelWidget,
     );
   }
 }

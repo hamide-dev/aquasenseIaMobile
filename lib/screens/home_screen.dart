@@ -188,8 +188,8 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                     padding: const EdgeInsets.only(bottom: 20.0), // Espacement sous le logo
                     child: Image.asset(
                       'assets/images/logo.png', // Chemin vers votre image logo.png
-                      height: 120, // Hauteur du logo (ajustez si besoin)
-                      // width: 120, // Vous pouvez aussi définir une largeur si nécessaire
+                      height: 200, // Hauteur du logo agrandie
+                      width: 200, // Largeur du logo agrandie
                     ),
                   ),
                   // --- FIN : AJOUT DU LOGO ---
