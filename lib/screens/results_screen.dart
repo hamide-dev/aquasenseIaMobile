@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import '/models/analysis_result.dart';
-import '/widgets/analysis_chart.dart'; // Assurez-vous que ce chemin est correct
+import '/widgets/analysis_chart.dart'; 
 
 class ResultsScreen extends StatefulWidget {
   final File imageFile;
